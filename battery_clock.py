@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout
-from PyQt5.QtCore import Qt, QTimer
+from PyQt5.QtCore import Qt, QTimer, QPoint
 import psutil  # For battery information
 from datetime import datetime
 
@@ -10,6 +10,7 @@ class MyWindow(QWidget):
         super().__init__()
 
         self.initUI()
+        self.dragPosition = QPoint()
 
     def initUI(self):
         # Set window flags to remove title bar and buttons
@@ -45,6 +46,17 @@ class MyWindow(QWidget):
         now = datetime.now()
         current_time = now.strftime("Current Time: %H:%M:%S")
         self.clock_label.setText(current_time)
+
+    # Implement mouse events for window dragging
+    def mousePressEvent(self, event):
+        if event.buttons() == Qt.LeftButton:
+            self.dragPosition = event.globalPos() - self.frameGeometry().topLeft()
+            event.accept()
+
+    def mouseMoveEvent(self, event):
+        if event.buttons() == Qt.LeftButton:
+            self.move(event.globalPos() - self.dragPosition)
+            event.accept()
 
 
 if __name__ == "__main__":
