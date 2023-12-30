@@ -8,4 +8,4 @@ and a dist directory which will have the built binary. (got around 37mb file as 
 
 4. pyinstaller --onefile --noconsole --strip --upx-dir="path to upx.exe" script_name.py => using
 a compressor called upx and also using strip flag to remove debug info , but still got an exe around 28mb.
-[upx releases - https://github.com/upx/upx/releases/]
+[upx releases - https://github.com/upx/upx/releases/](in my case path= D:\upx\upx-4.2.1-win64)
